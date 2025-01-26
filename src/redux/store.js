@@ -9,6 +9,7 @@ import userReducer from './userSlice.jsx';
 const persistConfig = {
   key: 'root', // Key for the persisted state
   storage, // Storage mechanism (localStorage in this case)
+  version: 1,
 };
 
 // Combine reducers
