@@ -4,7 +4,7 @@ import StudentsPage from '../components/StudentsTable'
 
 function Students() {
   return (
-    <div className='flex gap-6'>
+    <div className='flex w-full hide-scrollbar gap-6'>
         <SideBar/>
         <StudentsPage/>
         

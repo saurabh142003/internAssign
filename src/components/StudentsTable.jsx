@@ -269,7 +269,7 @@ const StudentsPage = () => {
             )}
 
 
-            <div className="rounded-3xl mt-6 shadow-xl p-6 bg-white">
+            <div className="rounded-3xl mt-6  h-screen hide-scrollbar overflow-y-scroll shadow-xl p-6 bg-white">
                 {/* Table Header */}
                 <div className="hidden md:grid grid-cols-6 gap-6 mb-4">
                     <div className="font-bold">ID</div>
