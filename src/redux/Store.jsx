@@ -30,6 +30,6 @@ const store = configureStore({
 
 // Persistor for redux-persist
 export const persistor = persistStore(store);
-
+// Hello test
 export default store;
 
