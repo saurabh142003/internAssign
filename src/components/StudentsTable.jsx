@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { collection, doc, getDocs, updateDoc, deleteDoc, addDoc, query, where } from 'firebase/firestore';
 import { getFirestore } from 'firebase/firestore';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FaBars, FaTimes } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
+import { logout } from '../redux/userSlice';
 const StudentsPage = () => {
     const [students, setStudents] = useState([]);
     const [showAddModal, setShowAddModal] = useState(false);
@@ -28,6 +30,15 @@ const StudentsPage = () => {
         admissionDate: '',
     });
     const db = getFirestore();
+
+  
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const handleLogout = () => {
+        // Clear user data and handle logout
+        dispatch(logout()); 
+        navigate('/signin'); // Navigate to the sign-in page
+    };
 
     const fetchStudents = async () => {
         if (user?.uid) {
