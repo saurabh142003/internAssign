@@ -75,7 +75,7 @@ function SignUp() {
                     />
                 </div>
                 <div className='w-full'>
-                    <button className='w-full uppercase bg-blue-800 p-3 mt-4 text-white rounded-md shadow-lg hover:bg-blue-700'>
+                    <button className='w-full uppercase cursor-pointer bg-blue-800 p-3 mt-4 text-white rounded-md shadow-lg hover:bg-blue-700'>
                         {"Sign Up"}
                     </button>
                 </div>

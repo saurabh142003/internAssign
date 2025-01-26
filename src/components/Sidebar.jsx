@@ -41,7 +41,7 @@ const SideBar = () => {
                     </NavLink>
                     <button
                        onClick={handleLogout}
-                        className="flex items-center space-x-2  hover:text-blue-500 p-2 rounded bg-[#0D28AB] text-white"
+                        className="flex cursor-pointer items-center space-x-2  hover:text-blue-500 p-2 rounded bg-[#0D28AB] text-white"
                     >
                         <TbLogout size={28} />
                         <span>Log Out</span>

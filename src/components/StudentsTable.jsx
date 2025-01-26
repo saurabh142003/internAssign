@@ -136,7 +136,7 @@ const StudentsPage = () => {
                 <h1 className="text-2xl font-bold mb-4">Students Page</h1>
                 <button
                     onClick={() => setShowAddModal(true)}
-                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                    className="bg-blue-500 cursor-pointer text-white px-4 py-2 rounded hover:bg-blue-600"
                 >
                     Add Student
                 </button>
@@ -369,19 +369,19 @@ const StudentsPage = () => {
                         <div className="hidden md:flex space-x-2">
                             <button
                                 onClick={() => openViewModal(student)}
-                                className="text-blue-500 hover:underline"
+                                className="text-blue-500 cursor-pointer hover:underline"
                             >
                                 View
                             </button>
                             <button
                                 onClick={() => openUpdateModal(student)}
-                                className="text-green-500 hover:underline"
+                                className="text-green-500 cursor-pointer hover:underline"
                             >
                                 Edit
                             </button>
                             <button
                                 onClick={() => handleDeleteStudent(student.id)}
-                                className="text-red-500 hover:underline"
+                                className="text-red-500 cursor-pointer hover:underline"
                             >
                                 Delete
                             </button>
