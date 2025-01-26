@@ -44,7 +44,8 @@ const StudentsPage = () => {
 
     const handleAddStudent = async () => {
         try {
-            const studentWithRef = { ...newStudent, userRef: user?.uid || '' };
+            const age = await calculateAge(newStudent.dateOfBirth)
+            const studentWithRef = { ...newStudent,age, userRef: user?.uid || '' };
             const docRef = await addDoc(collection(db, 'students'), studentWithRef);
             setStudents((prev) => [...prev, { id: docRef.id, ...studentWithRef }]);
             setShowAddModal(false);
@@ -74,6 +75,17 @@ const StudentsPage = () => {
         if (!studentToUpdate) return;
 
         try {
+            for (const student of students) {
+                if (student.id === studentToUpdate.id && student.dateOfBirth !== studentToUpdate.dateOfBirth) {
+                    // Calculate the new age if the date of birth is updated
+                    const age = calculateAge(studentToUpdate.dateOfBirth); // Sync, no need for `await` here
+                    
+                    // Update the student object with the new age
+                    studentToUpdate.age = age;
+                    break; // Exit loop once the relevant student is updated
+                }
+            }
+            
             const studentRef = doc(db, 'students', studentToUpdate.id);
             await updateDoc(studentRef, studentToUpdate);
             setStudents((prev) => prev.map((student) => (student.id === studentToUpdate.id ? studentToUpdate : student)));
@@ -101,6 +113,23 @@ const StudentsPage = () => {
         setShowViewModal(true);
     };
 
+    function calculateAge(dateOfBirth) {
+        const today = new Date(); 
+        const birthDate = new Date(dateOfBirth); 
+    
+        let age = today.getFullYear() - birthDate.getFullYear(); 
+    
+        
+        const hasBirthdayPassed = 
+            today.getMonth() > birthDate.getMonth() || 
+            (today.getMonth() === birthDate.getMonth() && today.getDate() >= birthDate.getDate());
+    
+        if (!hasBirthdayPassed) {
+            age -= 1; 
+        }
+    
+        return age;
+    }
     return (
         <div className="p-6 bg-[#F9FAFB] w-full">
             <div className='flex justify-between items-center'>
@@ -155,7 +184,7 @@ const StudentsPage = () => {
             {/* Add Student Modal */}
             {showAddModal && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50">
-                    <div className="bg-white max-h-screen overflow-y-auto p-6 rounded shadow-md w-full max-w-lg sm:w-3/4 md:w-1/2 lg:w-1/3">
+                    <div className="bg-white max-h-screen hide-scrollbar overflow-y-auto p-6 rounded shadow-md w-full max-w-lg sm:w-3/4 md:w-1/2 lg:w-1/3">
                         <h2 className="text-xl font-bold mb-4">Add Student</h2>
                         <form>
                             {Object.keys(newStudent).map((field) => (
@@ -197,11 +226,11 @@ const StudentsPage = () => {
             {/* Update Student Modal */}
             {showUpdateModal && studentToUpdate && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50">
-                    <div className="bg-white max-h-screen overflow-y-auto p-6 rounded shadow-md w-full max-w-lg sm:w-3/4 md:w-1/2 lg:w-1/3">
+                    <div className="bg-white max-h-screen hide-scrollbar overflow-y-auto p-6 rounded shadow-md w-full max-w-lg sm:w-3/4 md:w-1/2 lg:w-1/3">
                         <h2 className="text-xl font-bold mb-4">Update Student</h2>
                         <form>
                             {Object.keys(studentToUpdate).map((field) => (
-                                field !== "id" && field !== "userRef" && (
+                                field !== "id" && field !== "userRef" && field !== "age" && (
                                     <div key={field} className="mb-4">
                                         <label className="block text-sm font-medium text-gray-700 capitalize">
                                             {field}
@@ -241,7 +270,7 @@ const StudentsPage = () => {
             {/* View Student Modal */}
             {showViewModal && studentToView && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50">
-                    <div className="bg-white max-h-screen overflow-y-auto p-6 rounded shadow-md w-full max-w-lg sm:w-3/4 md:w-1/2 lg:w-1/3">
+                    <div className="bg-white max-h-screen hide-scrollbar overflow-y-auto p-6 rounded shadow-md w-full max-w-lg sm:w-3/4 md:w-1/2 lg:w-1/3">
                         <h2 className="text-xl font-bold mb-4">View Student</h2>
                         <div className="space-y-4">
                             {Object.keys(studentToView).map((field) => (
