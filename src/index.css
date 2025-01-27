@@ -19,3 +19,9 @@ html, body {
 .no-scroll {
     overflow: hidden;
 }
+
+.bgProperty {
+    background-color: rgba(0, 0, 0, 0.4); /* Black with 40% opacity */
+    backdrop-filter: blur(10px); /* Adjust the blur intensity */
+    -webkit-backdrop-filter: blur(10px); /* For Safari support */
+}

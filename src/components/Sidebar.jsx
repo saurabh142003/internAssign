@@ -32,7 +32,7 @@ const SideBar = () => {
                     <NavLink
                         to="/"
                         className={({ isActive }) =>
-                            `flex items-center space-x-2 text-gray-700 hover:text-blue-500 p-2 rounded ${isActive ? 'bg-[#0D28AB] text-white' : ''
+                            `flex items-center space-x-2 text-blue-600 hover:text-blue-500 p-2 rounded ${isActive ? 'bg-[#DAE9FD] text-blue-600' : ''
                             }`
                         }
                     >
@@ -41,7 +41,7 @@ const SideBar = () => {
                     </NavLink>
                     <button
                        onClick={handleLogout}
-                        className="flex cursor-pointer items-center space-x-2  hover:text-blue-500 p-2 rounded bg-[#0D28AB] text-white"
+                        className="flex cursor-pointer items-center space-x-2 hover:bg-[#DAE9FD]  hover:text-blue-500 p-2 rounded bg-white text-[#6A7A87]"
                     >
                         <TbLogout size={28} />
                         <span>Log Out</span>
